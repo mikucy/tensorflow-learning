@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import xlrd
 
 
-DATA_FILE = '/home/cp612sh/tensorflow-learning/a1/fire_theft.xls'
+DATA_FILE = '/home/cp612sh/tensorflow-learning/a1/data/fire_theft.xls'
 
 # Phase 1: Assemble the graph
 # Step 1: read in data from the xls.file
