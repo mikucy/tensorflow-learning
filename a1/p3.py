@@ -21,7 +21,7 @@ NUM_SAMPLED = 64  # Number of negative examples to sample.
 LEARNING_RATE = 0.02
 NUM_TRAIN_STEPS = 20000
 SKIP_STEP = 2000  # how many steps to skip before reporting the loss
-USE_UPDATE_IN_PLACE_INSTEAD_OF_MATRIX_ADD = 1
+USE_UPDATE_IN_PLACE_INSTEAD_OF_MATRIX_ADD = False
 WEIGHTS_FLD = 'processed/'
 
 
@@ -75,7 +75,7 @@ def count(batch_gen, num_train_steps):
                 for index in range(BATCH_SIZE):
                     pos = [int(centers[index]), int(targets[index][0])]
                     # build a sparse matrix
-                    pos_matrix = tf.sparse_to_dense([pos], [VOCAB_SIZE, VOCAB_SIZE], [1])
+                    pos_matrix = tf.sparse_tensor_to_dense(tf.SparseTensor([pos], [1], [VOCAB_SIZE, VOCAB_SIZE]))
                     co_occurrence_matrix.assign_add(pos_matrix)
                 if (step + 1) % SKIP_STEP == 0:
                     do_svd(co_occurrence_matrix, sess, step)
